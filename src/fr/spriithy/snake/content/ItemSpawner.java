@@ -23,9 +23,9 @@ public class ItemSpawner implements Drawable {
 	}
 
 	public void next() {
-		x = (nextAxisPosition(36, null)) * 11;
-		y = (nextAxisPosition(31, null)) * 11;
-		System.out.println(x / 11 + ", " + y / 11);
+		x = (nextAxisPosition(41, null) + 1) * 11;
+		y = (nextAxisPosition(36, null) + 1) * 11;
+		System.out.println("item spawned : " + x / 11 + ", " + y / 11);
 	}
 
 	@Override

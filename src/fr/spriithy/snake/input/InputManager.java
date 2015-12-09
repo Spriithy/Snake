@@ -5,11 +5,26 @@ import java.awt.event.KeyListener;
 
 public class InputManager implements KeyListener {
 
-	@Override
-	public void keyPressed(KeyEvent e) {}
+	public static final int SPACE = 32;
+	public static final int ESCAPE = 27;
+	
+	public static final int LEFT = 37;
+	public static final int UP = 38;
+	public static final int RIGHT = 39;
+	public static final int DOWN = 40;
+
+	public boolean[] keys = new boolean[65536];
 
 	@Override
-	public void keyReleased(KeyEvent e) {}
+	public void keyPressed(KeyEvent e) {
+//		System.out.println(e.getKeyCode() + ", \'" + e.getKeyChar() + "\'");
+		keys[e.getKeyCode()] = true;
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		keys[e.getKeyCode()] = false;
+	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {}

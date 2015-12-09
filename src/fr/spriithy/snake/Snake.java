@@ -10,24 +10,27 @@ import fr.spriithy.snake.graphics.Window;
 import fr.spriithy.snake.input.InputManager;
 
 public class Snake extends Canvas implements Runnable {
+	private static final long serialVersionUID = 1L;
 
 	private Window			window;
-	public ContentManager	cManager;
-	public InputManager		inputManager;
+	public ContentManager	content;
+	public InputManager		input;
 	private Thread			displayThread;
 
-	private boolean shouldRun = false;
+	private boolean	shouldRun	= false;
+	private int		i			= 0;
 
 	public Snake() {
 		setPreferredSize(new Dimension(480, 480));
 
-		cManager = new ContentManager();
-		inputManager = new InputManager();
+		content = new ContentManager();
+		input = new InputManager();
 
 		window = new Window("Snake revamp", 480, 480);
 
+		window.addKeyListener(input);
+		addKeyListener(input);
 		window.add(this);
-		window.addKeyListener(inputManager);
 	}
 
 	@Override
@@ -66,7 +69,14 @@ public class Snake extends Canvas implements Runnable {
 	}
 
 	public void update() {
-		// TODO
+
+		i++;
+		if (i % 12 == 0 && content.getMonster().inBounds(39, 34)) {
+			content.getMonster().move();
+			i = 1;
+		} else if (i % 12 == 0) {
+			// TODO game lost
+		}
 	}
 
 	public void render() {
@@ -78,9 +88,9 @@ public class Snake extends Canvas implements Runnable {
 
 		Graphics gc = buffer.getDrawGraphics();
 
-		cManager.update(gc);
-		cManager.clear();
-		cManager.render();
+		content.update(gc);
+		content.clear();
+		content.render();
 
 		gc.dispose();
 		buffer.show();
