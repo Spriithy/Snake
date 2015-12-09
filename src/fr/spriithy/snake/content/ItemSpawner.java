@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
-import fr.spriithy.snake.graphics.Drawable;
+import fr.spriithy.snake.interfaces.Drawable;
 
 @SuppressWarnings("all")
 public class ItemSpawner implements Drawable {
@@ -41,8 +41,6 @@ public class ItemSpawner implements Drawable {
 	public void resetPosition() {}
 
 	public void eat(Monster monster) {
-		Monster last = monster.body.get(monster.body.size() - 1);
-		monster.body.add(new SubMonster(last.x, last.y, last.direction));
 		next();
 	}
 }

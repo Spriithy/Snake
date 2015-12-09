@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import fr.spriithy.snake.graphics.Drawable;
+import fr.spriithy.snake.interfaces.Drawable;
 
 public class Monster implements Drawable {
 
@@ -13,12 +13,14 @@ public class Monster implements Drawable {
 	public int	x;
 	public int	y;
 
-	public Direction direction;
+	public Direction	direction;
+	public Direction	lastDirection;
 
 	public Monster(int x, int y) {
 		this.x = x;
 		this.y = y;
 		direction = Direction.UP;
+		lastDirection = direction;
 		body.add(this);
 	}
 
@@ -27,6 +29,8 @@ public class Monster implements Drawable {
 			monster.move();
 	}
 
+	// TODO previous pos
+	
 	public void move() {
 		switch (direction) {
 			case RIGHT:
@@ -45,7 +49,8 @@ public class Monster implements Drawable {
 	}
 
 	public void extend() {
-		body.add(new SubMonster(body.get(body.size() - 1).x, body.get(body.size() - 1).y + 1, direction));
+		// TODO
+		body.add(new SubMonster(body.get(body.size() - 1).x, body.get(body.size() - 1).y + 1, body.get(body.size() - 1)));
 	}
 
 	public boolean hasBodyAt(int x, int y) {

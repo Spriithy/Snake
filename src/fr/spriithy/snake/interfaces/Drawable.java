@@ -1,4 +1,4 @@
-package fr.spriithy.snake.graphics;
+package fr.spriithy.snake.interfaces;
 
 import java.awt.Color;
 import java.awt.Graphics;

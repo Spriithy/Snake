@@ -1,10 +1,13 @@
 package fr.spriithy.snake;
 
+import static fr.spriithy.snake.input.InputManager.*;
+
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
+import fr.spriithy.snake.content.Direction;
 import fr.spriithy.snake.graphics.ContentManager;
 import fr.spriithy.snake.graphics.Window;
 import fr.spriithy.snake.input.InputManager;
@@ -18,7 +21,7 @@ public class Snake extends Canvas implements Runnable {
 	private Thread			displayThread;
 
 	private boolean	shouldRun	= false;
-	private int		i			= 0;
+	private int		i			= 0, j = 0;
 
 	public Snake() {
 		setPreferredSize(new Dimension(480, 480));
@@ -69,10 +72,19 @@ public class Snake extends Canvas implements Runnable {
 	}
 
 	public void update() {
+
+		if (input.keys[LEFT]) content.monster.direction = Direction.LEFT;
+		if (input.keys[RIGHT]) content.monster.direction = Direction.RIGHT;
+		if (input.keys[UP]) content.monster.direction = Direction.UP;
+		if (input.keys[DOWN]) content.monster.direction = Direction.DOWN;
+
 		i++;
 		if (i % 12 == 0 && content.monster.inBounds(39, 34)) {
 			content.monster.moveAll();
-			content.monster.extend();
+			if (j <= 4) {
+				content.monster.extend();
+				j++;
+			}
 			i = 1;
 		} else if (i % 12 == 0) {
 			// TODO game lost

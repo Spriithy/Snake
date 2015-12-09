@@ -17,7 +17,6 @@ public class InputManager implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-//		System.out.println(e.getKeyCode() + ", \'" + e.getKeyChar() + "\'");
 		keys[e.getKeyCode()] = true;
 	}
 
