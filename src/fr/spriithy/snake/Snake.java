@@ -69,10 +69,10 @@ public class Snake extends Canvas implements Runnable {
 	}
 
 	public void update() {
-
 		i++;
-		if (i % 12 == 0 && content.getMonster().inBounds(39, 34)) {
-			content.getMonster().move();
+		if (i % 12 == 0 && content.monster.inBounds(39, 34)) {
+			content.monster.moveAll();
+			content.monster.extend();
 			i = 1;
 		} else if (i % 12 == 0) {
 			// TODO game lost

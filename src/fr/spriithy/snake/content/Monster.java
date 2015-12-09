@@ -13,13 +13,18 @@ public class Monster implements Drawable {
 	public int	x;
 	public int	y;
 
-	private Direction direction;
+	public Direction direction;
 
 	public Monster(int x, int y) {
 		this.x = x;
 		this.y = y;
-		direction = Direction.RIGHT;
+		direction = Direction.UP;
 		body.add(this);
+	}
+
+	public void moveAll() {
+		for (Monster monster : body)
+			monster.move();
 	}
 
 	public void move() {
@@ -31,12 +36,16 @@ public class Monster implements Drawable {
 				x -= 1;
 				break;
 			case UP:
-				y += 1;
-				break;
-			case DOWN:
 				y -= 1;
 				break;
+			case DOWN:
+				y += 1;
+				break;
 		}
+	}
+
+	public void extend() {
+		body.add(new SubMonster(body.get(body.size() - 1).x, body.get(body.size() - 1).y + 1, direction));
 	}
 
 	public boolean hasBodyAt(int x, int y) {
@@ -46,7 +55,7 @@ public class Monster implements Drawable {
 	}
 
 	public boolean inBounds(int width, int height) {
-		return (x >= 0 && x <= width && y >= 0 && y <= height);
+		return (x >= 1 && x <= width && y >= 1 && y <= height);
 	}
 
 	@Override

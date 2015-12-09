@@ -40,4 +40,9 @@ public class ItemSpawner implements Drawable {
 	@Override
 	public void resetPosition() {}
 
+	public void eat(Monster monster) {
+		Monster last = monster.body.get(monster.body.size() - 1);
+		monster.body.add(new SubMonster(last.x, last.y, last.direction));
+		next();
+	}
 }

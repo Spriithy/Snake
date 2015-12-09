@@ -10,8 +10,8 @@ import fr.spriithy.snake.content.Monster;
 public class ContentManager {
 
 	private Graphics	gc;
-	private Monster		monster;
-	private ItemSpawner	spawner;
+	public Monster		monster;
+	public ItemSpawner	spawner;
 
 	public ContentManager() {
 		spawner = new ItemSpawner();
@@ -19,7 +19,7 @@ public class ContentManager {
 	}
 
 	public void update(Graphics gc) {
-		this.gc = gc;
+		this.gc = gc; 
 	}
 
 	public void render() {
@@ -41,22 +41,6 @@ public class ContentManager {
 	public void clear() {
 		gc.setColor(Color.BLACK);
 		gc.fillRect(0, 0, 480, 480);
-	}
-
-	public Monster getMonster() {
-		return monster;
-	}
-
-	public void setMonster(Monster monster) {
-		this.monster = monster;
-	}
-
-	public ItemSpawner getSpawner() {
-		return spawner;
-	}
-
-	public void setSpawner(ItemSpawner spawner) {
-		this.spawner = spawner;
 	}
 
 }
