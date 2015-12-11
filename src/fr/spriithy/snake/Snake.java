@@ -72,21 +72,21 @@ public class Snake extends Canvas implements Runnable {
 	}
 
 	public void update() {
-
-		if (input.keys[LEFT]) content.monster.direction = Direction.LEFT;
-		if (input.keys[RIGHT]) content.monster.direction = Direction.RIGHT;
-		if (input.keys[UP]) content.monster.direction = Direction.UP;
-		if (input.keys[DOWN]) content.monster.direction = Direction.DOWN;
+		if (!content.ended) {
+			if (input.keys[LEFT] && !content.monster.direction.equals(Direction.RIGHT)) content.monster.direction = Direction.LEFT;
+			if (input.keys[RIGHT] && !content.monster.direction.equals(Direction.LEFT)) content.monster.direction = Direction.RIGHT;
+			if (input.keys[UP] && !content.monster.direction.equals(Direction.DOWN)) content.monster.direction = Direction.UP;
+			if (input.keys[DOWN] && !content.monster.direction.equals(Direction.UP)) content.monster.direction = Direction.DOWN;
+		}
 
 		i++;
-		if (i % 12 == 0 && content.monster.inBounds(39, 34)) {
+		if (i % 12 == 0 && content.monster.isNextPositionOK()) {
 			content.monster.moveAll();
-			if (j <= 4) {
-				content.monster.extend();
-				j++;
-			}
+			content.check();
 			i = 1;
 		} else if (i % 12 == 0) {
+			content.end();
+			System.out.println("t'es nul");
 			// TODO game lost
 		}
 	}

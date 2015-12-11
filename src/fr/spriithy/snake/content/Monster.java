@@ -29,9 +29,27 @@ public class Monster implements Drawable {
 			monster.move();
 	}
 
-	// TODO previous pos
-	
+	public boolean isNextPositionOK() {
+		for (Monster monster : body)
+			switch (direction) {
+				case RIGHT:
+					if (monster.x == x + 1 && monster.y == y) return false;
+					break;
+				case LEFT:
+					if (monster.x == x - 1 && monster.y == y) return false;
+					break;
+				case UP:
+					if (monster.x == x && monster.y == y - 1) return false;
+					break;
+				case DOWN:
+					if (monster.x == x && monster.y == y + 1) return false;
+					break;
+			}
+		return inBounds(39, 34);
+	}
+
 	public void move() {
+		lastDirection = direction;
 		switch (direction) {
 			case RIGHT:
 				x += 1;
@@ -49,7 +67,6 @@ public class Monster implements Drawable {
 	}
 
 	public void extend() {
-		// TODO
 		body.add(new SubMonster(body.get(body.size() - 1).x, body.get(body.size() - 1).y + 1, body.get(body.size() - 1)));
 	}
 
@@ -60,7 +77,11 @@ public class Monster implements Drawable {
 	}
 
 	public boolean inBounds(int width, int height) {
-		return (x >= 1 && x <= width && y >= 1 && y <= height);
+		if (direction.equals(Direction.RIGHT) && x <= width) return true;
+		if (direction.equals(Direction.LEFT) && x > 0) return true;
+		if (direction.equals(Direction.DOWN) && y <= height) return true;
+		if (direction.equals(Direction.UP) && y > 0) return true;
+		return false;
 	}
 
 	@Override
@@ -69,8 +90,9 @@ public class Monster implements Drawable {
 	@Override
 	public void draw(Graphics gc) {
 		gc.setColor(Color.ORANGE);
-		for (Monster monster : body)
-			gc.fillRoundRect(monster.x * 11 + 10, monster.y * 11 + 10, 11, 11, 3, 3);
+		gc.fillRoundRect(x * 11 + 10, y * 11 + 10, 11, 11, 3, 3);
+		for (Monster monster : body.subList(1, body.size()))
+			monster.draw(gc);
 	}
 
 	@Override

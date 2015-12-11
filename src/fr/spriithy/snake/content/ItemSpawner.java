@@ -43,4 +43,12 @@ public class ItemSpawner implements Drawable {
 	public void eat(Monster monster) {
 		next();
 	}
+
+	public int getX() {
+		return x / 11;
+	}
+
+	public int getY() {
+		return y / 11;
+	}
 }
